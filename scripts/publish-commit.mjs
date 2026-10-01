@@ -8,12 +8,13 @@ const options = {
   dryRun: false,
   expectedHead: undefined,
   message: undefined,
+  branch: 'main',
   repo: process.env.GITHUB_REPOSITORY || 'andylamp/exchange-converter',
 };
 
 function usage() {
   console.log(
-    'Usage: node scripts/publish-commit.mjs --message TEXT [--data-only] [--dry-run] [--expected-head SHA] [--repo OWNER/REPO]',
+    'Usage: node scripts/publish-commit.mjs --message TEXT [--branch NAME] [--data-only] [--dry-run] [--expected-head SHA] [--repo OWNER/REPO]',
   );
 }
 
@@ -67,6 +68,7 @@ function main() {
         '--expected-head': 'expectedHead',
         '--message': 'message',
         '--repo': 'repo',
+        '--branch': 'branch',
       }[option];
       if (!key || !args.length || args[0].startsWith('--')) {
         throw new Error(`Unknown or incomplete option: ${option}`);
@@ -78,6 +80,10 @@ function main() {
   if (!/^[\w.-]+\/[\w.-]+$/.test(options.repo)) {
     throw new Error('--repo must be OWNER/REPO');
   }
+  if (!/^[A-Za-z0-9][A-Za-z0-9._/-]*$/.test(options.branch) || options.branch.startsWith('refs/')) {
+    throw new Error('--branch must be an unqualified branch name');
+  }
+  git('check-ref-format', `refs/heads/${options.branch}`);
 
   process.chdir(git('rev-parse', '--show-toplevel').trim());
   const localHead = git('rev-parse', 'HEAD').trim();
@@ -116,7 +122,7 @@ function main() {
       JSON.stringify(
         {
           repository: options.repo,
-          branch: 'main',
+          branch: options.branch,
           expectedHead,
           message: options.message,
           additions,
@@ -132,9 +138,9 @@ function main() {
   const [owner, name] = options.repo.split('/');
   const current = graphql(
     `
-      query ($owner: String!, $name: String!) {
+      query ($owner: String!, $name: String!, $qualifiedRef: String!) {
         repository(owner: $owner, name: $name) {
-          ref(qualifiedName: "refs/heads/main") {
+          ref(qualifiedName: $qualifiedRef) {
             target {
               ... on Commit {
                 oid
@@ -149,10 +155,12 @@ function main() {
         }
       }
     `,
-    { owner, name },
+    { owner, name, qualifiedRef: `refs/heads/${options.branch}` },
   ).repository?.ref?.target;
   if (current?.oid !== expectedHead) {
-    throw new Error('GitHub main changed since checkout; fetch, revalidate, and retry');
+    throw new Error(
+      `GitHub ${options.branch} changed since checkout; fetch, revalidate, and retry`,
+    );
   }
   if (changedPaths.length === 0) {
     requireVerified(current);
@@ -178,7 +186,7 @@ function main() {
     `,
     {
       input: {
-        branch: { repositoryNameWithOwner: options.repo, branchName: 'main' },
+        branch: { repositoryNameWithOwner: options.repo, branchName: options.branch },
         expectedHeadOid: expectedHead,
         message: { headline: options.message },
         fileChanges,
