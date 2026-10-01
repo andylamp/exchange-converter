@@ -1,0 +1,50 @@
+{
+  "name": "exchange-converter",
+  "version": "1.0.0",
+  "private": true,
+  "type": "module",
+  "description": "A static multi-currency converter with private browser state and historical charts.",
+  "license": "MIT",
+  "author": "andylamp",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/andylamp/exchange-converter.git"
+  },
+  "engines": {
+    "node": ">=24 <25"
+  },
+  "scripts": {
+    "dev": "vite",
+    "build": "vite build",
+    "preview": "vite preview",
+    "typecheck": "tsc --noEmit",
+    "lint": "eslint .",
+    "format": "prettier --write .",
+    "format:check": "prettier --check .",
+    "test": "vitest run",
+    "test:e2e": "playwright test",
+    "data:update": "node --import tsx scripts/update-rates.ts",
+    "data:check": "node --import tsx scripts/validate-data.ts",
+    "bundle:check": "node scripts/check-bundle.mjs",
+    "verify": "npm run format:check && npm run lint && npm run typecheck && npm run test && npm run data:check && npm run build && npm run bundle:check"
+  },
+  "dependencies": {
+    "decimal.js": "10.6.0",
+    "preact": "11.0.0"
+  },
+  "devDependencies": {
+    "@axe-core/playwright": "4.13.0",
+    "@eslint/js": "10.0.1",
+    "@playwright/test": "1.63.0",
+    "@preact/preset-vite": "2.10.6",
+    "@types/node": "26.6.3",
+    "eslint": "10.11.0",
+    "globals": "17.12.0",
+    "prettier": "3.9.9",
+    "tsx": "4.23.15",
+    "typescript": "6.0.3",
+    "typescript-eslint": "8.71.0",
+    "vite": "8.3.1",
+    "vitest": "5.0.3"
+  }
+}

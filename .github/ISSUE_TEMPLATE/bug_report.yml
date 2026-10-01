@@ -1,0 +1,23 @@
+name: Bug report
+description: Report incorrect behavior or a broken interface
+labels: [bug]
+body:
+  - type: textarea
+    id: problem
+    attributes:
+      label: What happened?
+      description: Include the expected result and steps to reproduce it.
+    validations:
+      required: true
+  - type: input
+    id: environment
+    attributes:
+      label: Browser and device
+      placeholder: Safari on iPhone, Firefox on Linux, etc.
+    validations:
+      required: true
+  - type: textarea
+    id: rates
+    attributes:
+      label: Relevant currencies and rate dates
+      description: Include displayed source dates and whether custom rates are active. Do not paste cookies or private amounts.

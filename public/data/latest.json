@@ -1,0 +1,1549 @@
+{
+  "schemaVersion": 1,
+  "base": "EUR",
+  "generatedAt": "2026-10-01T01:55:24.435Z",
+  "currencies": [
+    {
+      "code": "AED",
+      "name": "United Arab Emirates Dirham",
+      "symbol": "د.إ"
+    },
+    {
+      "code": "AFN",
+      "name": "Afghan Afghani",
+      "symbol": "؋"
+    },
+    {
+      "code": "ALL",
+      "name": "Albanian Lek",
+      "symbol": "L"
+    },
+    {
+      "code": "AMD",
+      "name": "Armenian Dram",
+      "symbol": "֏"
+    },
+    {
+      "code": "AOA",
+      "name": "Angolan Kwanza",
+      "symbol": "Kz"
+    },
+    {
+      "code": "ARS",
+      "name": "Argentine Peso",
+      "symbol": "$"
+    },
+    {
+      "code": "AUD",
+      "name": "Australian Dollar",
+      "symbol": "$"
+    },
+    {
+      "code": "AWG",
+      "name": "Aruban Florin",
+      "symbol": "ƒ"
+    },
+    {
+      "code": "AZN",
+      "name": "Azerbaijani Manat",
+      "symbol": "₼"
+    },
+    {
+      "code": "BAM",
+      "name": "Bosnia and Herzegovina Convertible Mark",
+      "symbol": "КМ"
+    },
+    {
+      "code": "BBD",
+      "name": "Barbadian Dollar",
+      "symbol": "$"
+    },
+    {
+      "code": "BDT",
+      "name": "Bangladeshi Taka",
+      "symbol": "৳"
+    },
+    {
+      "code": "BHD",
+      "name": "Bahraini Dinar",
+      "symbol": "د.ب"
+    },
+    {
+      "code": "BIF",
+      "name": "Burundian Franc",
+      "symbol": "Fr"
+    },
+    {
+      "code": "BMD",
+      "name": "Bermudian Dollar",
+      "symbol": "$"
+    },
+    {
+      "code": "BND",
+      "name": "Brunei Dollar",
+      "symbol": "$"
+    },
+    {
+      "code": "BOB",
+      "name": "Bolivian Boliviano",
+      "symbol": "Bs."
+    },
+    {
+      "code": "BRL",
+      "name": "Brazilian Real",
+      "symbol": "R$"
+    },
+    {
+      "code": "BSD",
+      "name": "Bahamian Dollar",
+      "symbol": "$"
+    },
+    {
+      "code": "BTN",
+      "name": "Bhutanese Ngultrum",
+      "symbol": "Nu."
+    },
+    {
+      "code": "BWP",
+      "name": "Botswana Pula",
+      "symbol": "P"
+    },
+    {
+      "code": "BYN",
+      "name": "Belarusian Ruble",
+      "symbol": "Br"
+    },
+    {
+      "code": "BZD",
+      "name": "Belize Dollar",
+      "symbol": "$"
+    },
+    {
+      "code": "CAD",
+      "name": "Canadian Dollar",
+      "symbol": "$"
+    },
+    {
+      "code": "CDF",
+      "name": "Congolese Franc",
+      "symbol": "Fr"
+    },
+    {
+      "code": "CHF",
+      "name": "Swiss Franc",
+      "symbol": "CHF"
+    },
+    {
+      "code": "CLP",
+      "name": "Chilean Peso",
+      "symbol": "$"
+    },
+    {
+      "code": "CNY",
+      "name": "Chinese Renminbi Yuan",
+      "symbol": "¥"
+    },
+    {
+      "code": "COP",
+      "name": "Colombian Peso",
+      "symbol": "$"
+    },
+    {
+      "code": "CRC",
+      "name": "Costa Rican Colón",
+      "symbol": "₡"
+    },
+    {
+      "code": "CUP",
+      "name": "Cuban Peso",
+      "symbol": "$"
+    },
+    {
+      "code": "CVE",
+      "name": "Cape Verdean Escudo",
+      "symbol": "$"
+    },
+    {
+      "code": "CZK",
+      "name": "Czech Koruna",
+      "symbol": "Kč"
+    },
+    {
+      "code": "DJF",
+      "name": "Djiboutian Franc",
+      "symbol": "Fdj"
+    },
+    {
+      "code": "DKK",
+      "name": "Danish Krone",
+      "symbol": "kr."
+    },
+    {
+      "code": "DOP",
+      "name": "Dominican Peso",
+      "symbol": "$"
+    },
+    {
+      "code": "DZD",
+      "name": "Algerian Dinar",
+      "symbol": "د.ج"
+    },
+    {
+      "code": "EGP",
+      "name": "Egyptian Pound",
+      "symbol": "ج.م"
+    },
+    {
+      "code": "ERN",
+      "name": "Eritrean Nakfa",
+      "symbol": "Nfk"
+    },
+    {
+      "code": "ETB",
+      "name": "Ethiopian Birr",
+      "symbol": "Br"
+    },
+    {
+      "code": "EUR",
+      "name": "Euro",
+      "symbol": "€"
+    },
+    {
+      "code": "FJD",
+      "name": "Fijian Dollar",
+      "symbol": "$"
+    },
+    {
+      "code": "FKP",
+      "name": "Falkland Pound",
+      "symbol": "£"
+    },
+    {
+      "code": "GBP",
+      "name": "British Pound",
+      "symbol": "£"
+    },
+    {
+      "code": "GEL",
+      "name": "Georgian Lari",
+      "symbol": "₾"
+    },
+    {
+      "code": "GHS",
+      "name": "Ghanaian Cedi",
+      "symbol": "₵"
+    },
+    {
+      "code": "GIP",
+      "name": "Gibraltar Pound",
+      "symbol": "£"
+    },
+    {
+      "code": "GMD",
+      "name": "Gambian Dalasi",
+      "symbol": "D"
+    },
+    {
+      "code": "GNF",
+      "name": "Guinean Franc",
+      "symbol": "Fr"
+    },
+    {
+      "code": "GTQ",
+      "name": "Guatemalan Quetzal",
+      "symbol": "Q"
+    },
+    {
+      "code": "GYD",
+      "name": "Guyanese Dollar",
+      "symbol": "$"
+    },
+    {
+      "code": "HKD",
+      "name": "Hong Kong Dollar",
+      "symbol": "$"
+    },
+    {
+      "code": "HNL",
+      "name": "Honduran Lempira",
+      "symbol": "L"
+    },
+    {
+      "code": "HTG",
+      "name": "Haitian Gourde",
+      "symbol": "G"
+    },
+    {
+      "code": "HUF",
+      "name": "Hungarian Forint",
+      "symbol": "Ft"
+    },
+    {
+      "code": "IDR",
+      "name": "Indonesian Rupiah",
+      "symbol": "Rp"
+    },
+    {
+      "code": "ILS",
+      "name": "Israeli New Shekel",
+      "symbol": "₪"
+    },
+    {
+      "code": "INR",
+      "name": "Indian Rupee",
+      "symbol": "₹"
+    },
+    {
+      "code": "IQD",
+      "name": "Iraqi Dinar",
+      "symbol": "ع.د"
+    },
+    {
+      "code": "IRR",
+      "name": "Iranian Rial",
+      "symbol": "﷼"
+    },
+    {
+      "code": "ISK",
+      "name": "Icelandic Króna",
+      "symbol": "kr."
+    },
+    {
+      "code": "JMD",
+      "name": "Jamaican Dollar",
+      "symbol": "$"
+    },
+    {
+      "code": "JOD",
+      "name": "Jordanian Dinar",
+      "symbol": "د.ا"
+    },
+    {
+      "code": "JPY",
+      "name": "Japanese Yen",
+      "symbol": "¥"
+    },
+    {
+      "code": "KES",
+      "name": "Kenyan Shilling",
+      "symbol": "KSh"
+    },
+    {
+      "code": "KGS",
+      "name": "Kyrgyzstani Som",
+      "symbol": "som"
+    },
+    {
+      "code": "KHR",
+      "name": "Cambodian Riel",
+      "symbol": "៛"
+    },
+    {
+      "code": "KMF",
+      "name": "Comorian Franc",
+      "symbol": "Fr"
+    },
+    {
+      "code": "KPW",
+      "name": "North Korean Won",
+      "symbol": "₩"
+    },
+    {
+      "code": "KRW",
+      "name": "South Korean Won",
+      "symbol": "₩"
+    },
+    {
+      "code": "KWD",
+      "name": "Kuwaiti Dinar",
+      "symbol": "د.ك"
+    },
+    {
+      "code": "KYD",
+      "name": "Cayman Islands Dollar",
+      "symbol": "$"
+    },
+    {
+      "code": "KZT",
+      "name": "Kazakhstani Tenge",
+      "symbol": "₸"
+    },
+    {
+      "code": "LAK",
+      "name": "Lao Kip",
+      "symbol": "₭"
+    },
+    {
+      "code": "LBP",
+      "name": "Lebanese Pound",
+      "symbol": "ل.ل"
+    },
+    {
+      "code": "LKR",
+      "name": "Sri Lankan Rupee",
+      "symbol": "₨"
+    },
+    {
+      "code": "LRD",
+      "name": "Liberian Dollar",
+      "symbol": "$"
+    },
+    {
+      "code": "LSL",
+      "name": "Lesotho Loti",
+      "symbol": "L"
+    },
+    {
+      "code": "LYD",
+      "name": "Libyan Dinar",
+      "symbol": "ل.د"
+    },
+    {
+      "code": "MAD",
+      "name": "Moroccan Dirham",
+      "symbol": "د.م."
+    },
+    {
+      "code": "MDL",
+      "name": "Moldovan Leu",
+      "symbol": "L"
+    },
+    {
+      "code": "MGA",
+      "name": "Malagasy Ariary",
+      "symbol": "Ar"
+    },
+    {
+      "code": "MKD",
+      "name": "Macedonian Denar",
+      "symbol": "ден"
+    },
+    {
+      "code": "MMK",
+      "name": "Myanmar Kyat",
+      "symbol": "K"
+    },
+    {
+      "code": "MNT",
+      "name": "Mongolian Tögrög",
+      "symbol": "₮"
+    },
+    {
+      "code": "MOP",
+      "name": "Macanese Pataca",
+      "symbol": "P"
+    },
+    {
+      "code": "MRU",
+      "name": "Mauritanian Ouguiya",
+      "symbol": "UM"
+    },
+    {
+      "code": "MUR",
+      "name": "Mauritian Rupee",
+      "symbol": "₨"
+    },
+    {
+      "code": "MVR",
+      "name": "Maldivian Rufiyaa",
+      "symbol": "MVR"
+    },
+    {
+      "code": "MWK",
+      "name": "Malawian Kwacha",
+      "symbol": "MK"
+    },
+    {
+      "code": "MXN",
+      "name": "Mexican Peso",
+      "symbol": "$"
+    },
+    {
+      "code": "MYR",
+      "name": "Malaysian Ringgit",
+      "symbol": "RM"
+    },
+    {
+      "code": "MZN",
+      "name": "Mozambican Metical",
+      "symbol": "MTn"
+    },
+    {
+      "code": "NAD",
+      "name": "Namibian Dollar",
+      "symbol": "$"
+    },
+    {
+      "code": "NGN",
+      "name": "Nigerian Naira",
+      "symbol": "₦"
+    },
+    {
+      "code": "NIO",
+      "name": "Nicaraguan Córdoba",
+      "symbol": "C$"
+    },
+    {
+      "code": "NOK",
+      "name": "Norwegian Krone",
+      "symbol": "kr"
+    },
+    {
+      "code": "NPR",
+      "name": "Nepalese Rupee",
+      "symbol": "Rs."
+    },
+    {
+      "code": "NZD",
+      "name": "New Zealand Dollar",
+      "symbol": "$"
+    },
+    {
+      "code": "OMR",
+      "name": "Omani Rial",
+      "symbol": "ر.ع."
+    },
+    {
+      "code": "PAB",
+      "name": "Panamanian Balboa",
+      "symbol": "B/."
+    },
+    {
+      "code": "PEN",
+      "name": "Peruvian Sol",
+      "symbol": "S/"
+    },
+    {
+      "code": "PGK",
+      "name": "Papua New Guinean Kina",
+      "symbol": "K"
+    },
+    {
+      "code": "PHP",
+      "name": "Philippine Peso",
+      "symbol": "₱"
+    },
+    {
+      "code": "PKR",
+      "name": "Pakistani Rupee",
+      "symbol": "₨"
+    },
+    {
+      "code": "PLN",
+      "name": "Polish Złoty",
+      "symbol": "zł"
+    },
+    {
+      "code": "PYG",
+      "name": "Paraguayan Guaraní",
+      "symbol": "₲"
+    },
+    {
+      "code": "QAR",
+      "name": "Qatari Riyal",
+      "symbol": "ر.ق"
+    },
+    {
+      "code": "RON",
+      "name": "Romanian Leu",
+      "symbol": "Lei"
+    },
+    {
+      "code": "RSD",
+      "name": "Serbian Dinar",
+      "symbol": "RSD"
+    },
+    {
+      "code": "RUB",
+      "name": "Russian Ruble",
+      "symbol": "₽"
+    },
+    {
+      "code": "RWF",
+      "name": "Rwandan Franc",
+      "symbol": "FRw"
+    },
+    {
+      "code": "SAR",
+      "name": "Saudi Riyal",
+      "symbol": "ر.س"
+    },
+    {
+      "code": "SBD",
+      "name": "Solomon Islands Dollar",
+      "symbol": "$"
+    },
+    {
+      "code": "SCR",
+      "name": "Seychellois Rupee",
+      "symbol": "₨"
+    },
+    {
+      "code": "SDG",
+      "name": "Sudanese Pound",
+      "symbol": "£"
+    },
+    {
+      "code": "SEK",
+      "name": "Swedish Krona",
+      "symbol": "kr"
+    },
+    {
+      "code": "SGD",
+      "name": "Singapore Dollar",
+      "symbol": "$"
+    },
+    {
+      "code": "SHP",
+      "name": "Saint Helenian Pound",
+      "symbol": "£"
+    },
+    {
+      "code": "SLE",
+      "name": "New Leone",
+      "symbol": "Le"
+    },
+    {
+      "code": "SOS",
+      "name": "Somali Shilling",
+      "symbol": "Sh"
+    },
+    {
+      "code": "SRD",
+      "name": "Surinamese Dollar",
+      "symbol": "$"
+    },
+    {
+      "code": "SSP",
+      "name": "South Sudanese Pound",
+      "symbol": "£"
+    },
+    {
+      "code": "STN",
+      "name": "São Tomé and Príncipe Second Dobra",
+      "symbol": "Db"
+    },
+    {
+      "code": "SVC",
+      "name": "Salvadoran Colón",
+      "symbol": "₡"
+    },
+    {
+      "code": "SYP",
+      "name": "Syrian Pound",
+      "symbol": "£S"
+    },
+    {
+      "code": "SZL",
+      "name": "Swazi Lilangeni",
+      "symbol": "E"
+    },
+    {
+      "code": "THB",
+      "name": "Thai Baht",
+      "symbol": "฿"
+    },
+    {
+      "code": "TJS",
+      "name": "Tajikistani Somoni",
+      "symbol": "ЅМ"
+    },
+    {
+      "code": "TMT",
+      "name": "Turkmenistani Manat",
+      "symbol": "m"
+    },
+    {
+      "code": "TND",
+      "name": "Tunisian Dinar",
+      "symbol": "د.ت"
+    },
+    {
+      "code": "TOP",
+      "name": "Tongan Paʻanga",
+      "symbol": "T$"
+    },
+    {
+      "code": "TRY",
+      "name": "Turkish Lira",
+      "symbol": "₺"
+    },
+    {
+      "code": "TTD",
+      "name": "Trinidad and Tobago Dollar",
+      "symbol": "$"
+    },
+    {
+      "code": "TWD",
+      "name": "New Taiwan Dollar",
+      "symbol": "$"
+    },
+    {
+      "code": "TZS",
+      "name": "Tanzanian Shilling",
+      "symbol": "Sh"
+    },
+    {
+      "code": "UAH",
+      "name": "Ukrainian Hryvnia",
+      "symbol": "₴"
+    },
+    {
+      "code": "UGX",
+      "name": "Ugandan Shilling",
+      "symbol": "USh"
+    },
+    {
+      "code": "USD",
+      "name": "United States Dollar",
+      "symbol": "$"
+    },
+    {
+      "code": "UYU",
+      "name": "Uruguayan Peso",
+      "symbol": "$U"
+    },
+    {
+      "code": "UZS",
+      "name": "Uzbekistan Som",
+      "symbol": "so'm"
+    },
+    {
+      "code": "VES",
+      "name": "Venezuelan Bolívar Soberano",
+      "symbol": "Bs"
+    },
+    {
+      "code": "VND",
+      "name": "Vietnamese Đồng",
+      "symbol": "₫"
+    },
+    {
+      "code": "VUV",
+      "name": "Vanuatu Vatu",
+      "symbol": "Vt"
+    },
+    {
+      "code": "WST",
+      "name": "Samoan Tala",
+      "symbol": "T"
+    },
+    {
+      "code": "XAF",
+      "name": "Central African CFA Franc",
+      "symbol": "CFA"
+    },
+    {
+      "code": "XCD",
+      "name": "East Caribbean Dollar",
+      "symbol": "$"
+    },
+    {
+      "code": "XCG",
+      "name": "Caribbean Guilder",
+      "symbol": "Cg"
+    },
+    {
+      "code": "XOF",
+      "name": "West African CFA Franc",
+      "symbol": "Fr"
+    },
+    {
+      "code": "XPF",
+      "name": "CFP Franc",
+      "symbol": "₣"
+    },
+    {
+      "code": "YER",
+      "name": "Yemeni Rial",
+      "symbol": "﷼"
+    },
+    {
+      "code": "ZAR",
+      "name": "South African Rand",
+      "symbol": "R"
+    },
+    {
+      "code": "ZMW",
+      "name": "Zambian Kwacha",
+      "symbol": "K"
+    },
+    {
+      "code": "ZWG",
+      "name": "Zimbabwe Gold",
+      "symbol": "ZiG"
+    }
+  ],
+  "rates": {
+    "AED": {
+      "rate": "4.1692",
+      "date": "2026-10-01",
+      "fetchedAt": "2026-10-01T01:55:24.435Z"
+    },
+    "AFN": {
+      "rate": "73.868",
+      "date": "2026-09-30",
+      "fetchedAt": "2026-10-01T01:55:24.435Z"
+    },
+    "ALL": {
+      "rate": "91.98",
+      "date": "2026-09-30",
+      "fetchedAt": "2026-10-01T01:55:24.435Z"
+    },
+    "AMD": {
+      "rate": "412.18",
+      "date": "2026-09-30",
+      "fetchedAt": "2026-10-01T01:55:24.435Z"
+    },
+    "AOA": {
+      "rate": "1042.49",
+      "date": "2026-09-30",
+      "fetchedAt": "2026-10-01T01:55:24.435Z"
+    },
+    "ARS": {
+      "rate": "1729.18",
+      "date": "2026-09-30",
+      "fetchedAt": "2026-10-01T01:55:24.435Z"
+    },
+    "AUD": {
+      "rate": "1.6261",
+      "date": "2026-10-01",
+      "fetchedAt": "2026-10-01T01:55:24.435Z"
+    },
+    "AWG": {
+      "rate": "2.0331",
+      "date": "2026-09-30",
+      "fetchedAt": "2026-10-01T01:55:24.435Z"
+    },
+    "AZN": {
+      "rate": "1.9295",
+      "date": "2026-09-30",
+      "fetchedAt": "2026-10-01T01:55:24.435Z"
+    },
+    "BAM": {
+      "rate": "1.9558",
+      "date": "2026-10-01",
+      "fetchedAt": "2026-10-01T01:55:24.435Z"
+    },
+    "BBD": {
+      "rate": "2.3243",
+      "date": "2026-09-30",
+      "fetchedAt": "2026-10-01T01:55:24.435Z"
+    },
+    "BDT": {
+      "rate": "139.65",
+      "date": "2026-09-30",
+      "fetchedAt": "2026-10-01T01:55:24.435Z"
+    },
+    "BHD": {
+      "rate": "0.42686",
+      "date": "2026-09-30",
+      "fetchedAt": "2026-10-01T01:55:24.435Z"
+    },
+    "BIF": {
+      "rate": "3405.7",
+      "date": "2026-09-30",
+      "fetchedAt": "2026-10-01T01:55:24.435Z"
+    },
+    "BMD": {
+      "rate": "1.1353",
+      "date": "2026-09-30",
+      "fetchedAt": "2026-10-01T01:55:24.435Z"
+    },
+    "BND": {
+      "rate": "1.4502",
+      "date": "2026-10-01",
+      "fetchedAt": "2026-10-01T01:55:24.435Z"
+    },
+    "BOB": {
+      "rate": "13.6402",
+      "date": "2026-09-30",
+      "fetchedAt": "2026-10-01T01:55:24.435Z"
+    },
+    "BRL": {
+      "rate": "5.9122",
+      "date": "2026-09-30",
+      "fetchedAt": "2026-10-01T01:55:24.435Z"
+    },
+    "BSD": {
+      "rate": "1.1471",
+      "date": "2026-09-30",
+      "fetchedAt": "2026-10-01T01:55:24.435Z"
+    },
+    "BTN": {
+      "rate": "108.83",
+      "date": "2026-09-30",
+      "fetchedAt": "2026-10-01T01:55:24.435Z"
+    },
+    "BWP": {
+      "rate": "15.5077",
+      "date": "2026-09-30",
+      "fetchedAt": "2026-10-01T01:55:24.435Z"
+    },
+    "BYN": {
+      "rate": "3.432",
+      "date": "2026-09-30",
+      "fetchedAt": "2026-10-01T01:55:24.435Z"
+    },
+    "BZD": {
+      "rate": "2.3064",
+      "date": "2026-09-30",
+      "fetchedAt": "2026-10-01T01:55:24.435Z"
+    },
+    "CAD": {
+      "rate": "1.609",
+      "date": "2026-10-01",
+      "fetchedAt": "2026-10-01T01:55:24.435Z"
+    },
+    "CDF": {
+      "rate": "2601.56",
+      "date": "2026-09-30",
+      "fetchedAt": "2026-10-01T01:55:24.435Z"
+    },
+    "CHF": {
+      "rate": "0.94621",
+      "date": "2026-10-01",
+      "fetchedAt": "2026-10-01T01:55:24.435Z"
+    },
+    "CLP": {
+      "rate": "1102.9",
+      "date": "2026-09-30",
+      "fetchedAt": "2026-10-01T01:55:24.435Z"
+    },
+    "CNY": {
+      "rate": "7.6061",
+      "date": "2026-10-01",
+      "fetchedAt": "2026-10-01T01:55:24.435Z"
+    },
+    "COP": {
+      "rate": "3785.39",
+      "date": "2026-10-01",
+      "fetchedAt": "2026-10-01T01:55:24.435Z"
+    },
+    "CRC": {
+      "rate": "517.59",
+      "date": "2026-09-30",
+      "fetchedAt": "2026-10-01T01:55:24.435Z"
+    },
+    "CUP": {
+      "rate": "27.246",
+      "date": "2026-09-30",
+      "fetchedAt": "2026-10-01T01:55:24.435Z"
+    },
+    "CVE": {
+      "rate": "110.26",
+      "date": "2026-09-30",
+      "fetchedAt": "2026-10-01T01:55:24.435Z"
+    },
+    "CZK": {
+      "rate": "24.433",
+      "date": "2026-10-01",
+      "fetchedAt": "2026-10-01T01:55:24.435Z"
+    },
+    "DJF": {
+      "rate": "201.63",
+      "date": "2026-09-30",
+      "fetchedAt": "2026-10-01T01:55:24.435Z"
+    },
+    "DKK": {
+      "rate": "7.4767",
+      "date": "2026-10-01",
+      "fetchedAt": "2026-10-01T01:55:24.435Z"
+    },
+    "DOP": {
+      "rate": "68.225",
+      "date": "2026-09-30",
+      "fetchedAt": "2026-10-01T01:55:24.435Z"
+    },
+    "DZD": {
+      "rate": "151.91",
+      "date": "2026-09-30",
+      "fetchedAt": "2026-10-01T01:55:24.435Z"
+    },
+    "EGP": {
+      "rate": "59.093",
+      "date": "2026-09-30",
+      "fetchedAt": "2026-10-01T01:55:24.435Z"
+    },
+    "ERN": {
+      "rate": "17.2863",
+      "date": "2026-09-30",
+      "fetchedAt": "2026-10-01T01:55:24.435Z"
+    },
+    "ETB": {
+      "rate": "183.43",
+      "date": "2026-09-30",
+      "fetchedAt": "2026-10-01T01:55:24.435Z"
+    },
+    "EUR": {
+      "rate": "1",
+      "date": "2026-10-01",
+      "fetchedAt": "2026-10-01T01:55:24.435Z"
+    },
+    "FJD": {
+      "rate": "2.5503",
+      "date": "2026-09-30",
+      "fetchedAt": "2026-10-01T01:55:24.435Z"
+    },
+    "FKP": {
+      "rate": "0.85635",
+      "date": "2026-09-30",
+      "fetchedAt": "2026-10-01T01:55:24.435Z"
+    },
+    "GBP": {
+      "rate": "0.85627",
+      "date": "2026-10-01",
+      "fetchedAt": "2026-10-01T01:55:24.435Z"
+    },
+    "GEL": {
+      "rate": "2.9544",
+      "date": "2026-09-30",
+      "fetchedAt": "2026-10-01T01:55:24.435Z"
+    },
+    "GHS": {
+      "rate": "13.2275",
+      "date": "2026-09-30",
+      "fetchedAt": "2026-10-01T01:55:24.435Z"
+    },
+    "GIP": {
+      "rate": "0.86782",
+      "date": "2026-09-30",
+      "fetchedAt": "2026-10-01T01:55:24.435Z"
+    },
+    "GMD": {
+      "rate": "83.47",
+      "date": "2026-09-30",
+      "fetchedAt": "2026-10-01T01:55:24.435Z"
+    },
+    "GNF": {
+      "rate": "9989",
+      "date": "2026-09-30",
+      "fetchedAt": "2026-10-01T01:55:24.435Z"
+    },
+    "GTQ": {
+      "rate": "8.6767",
+      "date": "2026-09-30",
+      "fetchedAt": "2026-10-01T01:55:24.435Z"
+    },
+    "GYD": {
+      "rate": "239.51",
+      "date": "2026-09-30",
+      "fetchedAt": "2026-10-01T01:55:24.435Z"
+    },
+    "HKD": {
+      "rate": "8.914",
+      "date": "2026-10-01",
+      "fetchedAt": "2026-10-01T01:55:24.435Z"
+    },
+    "HNL": {
+      "rate": "30.517",
+      "date": "2026-09-30",
+      "fetchedAt": "2026-10-01T01:55:24.435Z"
+    },
+    "HTG": {
+      "rate": "148.52",
+      "date": "2026-09-30",
+      "fetchedAt": "2026-10-01T01:55:24.435Z"
+    },
+    "HUF": {
+      "rate": "366.64",
+      "date": "2026-10-01",
+      "fetchedAt": "2026-10-01T01:55:24.435Z"
+    },
+    "IDR": {
+      "rate": "20346",
+      "date": "2026-10-01",
+      "fetchedAt": "2026-10-01T01:55:24.435Z"
+    },
+    "ILS": {
+      "rate": "3.4812",
+      "date": "2026-09-30",
+      "fetchedAt": "2026-10-01T01:55:24.435Z"
+    },
+    "INR": {
+      "rate": "108.83",
+      "date": "2026-10-01",
+      "fetchedAt": "2026-10-01T01:55:24.435Z"
+    },
+    "IQD": {
+      "rate": "1486.78",
+      "date": "2026-09-30",
+      "fetchedAt": "2026-10-01T01:55:24.435Z"
+    },
+    "IRR": {
+      "rate": "1553265",
+      "date": "2026-09-30",
+      "fetchedAt": "2026-10-01T01:55:24.435Z"
+    },
+    "ISK": {
+      "rate": "136.93",
+      "date": "2026-09-30",
+      "fetchedAt": "2026-10-01T01:55:24.435Z"
+    },
+    "JMD": {
+      "rate": "179.21",
+      "date": "2026-09-30",
+      "fetchedAt": "2026-10-01T01:55:24.435Z"
+    },
+    "JOD": {
+      "rate": "0.8049",
+      "date": "2026-09-30",
+      "fetchedAt": "2026-10-01T01:55:24.435Z"
+    },
+    "JPY": {
+      "rate": "178.53",
+      "date": "2026-10-01",
+      "fetchedAt": "2026-10-01T01:55:24.435Z"
+    },
+    "KES": {
+      "rate": "147.11",
+      "date": "2026-09-30",
+      "fetchedAt": "2026-10-01T01:55:24.435Z"
+    },
+    "KGS": {
+      "rate": "99.36",
+      "date": "2026-09-30",
+      "fetchedAt": "2026-10-01T01:55:24.435Z"
+    },
+    "KHR": {
+      "rate": "4608.41",
+      "date": "2026-10-01",
+      "fetchedAt": "2026-10-01T01:55:24.435Z"
+    },
+    "KMF": {
+      "rate": "492.45",
+      "date": "2026-09-30",
+      "fetchedAt": "2026-10-01T01:55:24.435Z"
+    },
+    "KPW": {
+      "rate": "147.58",
+      "date": "2026-09-30",
+      "fetchedAt": "2026-10-01T01:55:24.435Z"
+    },
+    "KRW": {
+      "rate": "1537.77",
+      "date": "2026-10-01",
+      "fetchedAt": "2026-10-01T01:55:24.435Z"
+    },
+    "KWD": {
+      "rate": "0.34982",
+      "date": "2026-10-01",
+      "fetchedAt": "2026-10-01T01:55:24.435Z"
+    },
+    "KYD": {
+      "rate": "0.95043",
+      "date": "2026-09-30",
+      "fetchedAt": "2026-10-01T01:55:24.435Z"
+    },
+    "KZT": {
+      "rate": "499.25",
+      "date": "2026-09-30",
+      "fetchedAt": "2026-10-01T01:55:24.435Z"
+    },
+    "LAK": {
+      "rate": "25302",
+      "date": "2026-10-01",
+      "fetchedAt": "2026-10-01T01:55:24.435Z"
+    },
+    "LBP": {
+      "rate": "101862",
+      "date": "2026-09-30",
+      "fetchedAt": "2026-10-01T01:55:24.435Z"
+    },
+    "LKR": {
+      "rate": "375.45",
+      "date": "2026-09-30",
+      "fetchedAt": "2026-10-01T01:55:24.435Z"
+    },
+    "LRD": {
+      "rate": "194.82",
+      "date": "2026-09-30",
+      "fetchedAt": "2026-10-01T01:55:24.435Z"
+    },
+    "LSL": {
+      "rate": "18.6117",
+      "date": "2026-09-30",
+      "fetchedAt": "2026-10-01T01:55:24.435Z"
+    },
+    "LYD": {
+      "rate": "7.2645",
+      "date": "2026-09-30",
+      "fetchedAt": "2026-10-01T01:55:24.435Z"
+    },
+    "MAD": {
+      "rate": "10.9876",
+      "date": "2026-09-30",
+      "fetchedAt": "2026-10-01T01:55:24.435Z"
+    },
+    "MDL": {
+      "rate": "20.118",
+      "date": "2026-09-30",
+      "fetchedAt": "2026-10-01T01:55:24.435Z"
+    },
+    "MGA": {
+      "rate": "5008",
+      "date": "2026-09-30",
+      "fetchedAt": "2026-10-01T01:55:24.435Z"
+    },
+    "MKD": {
+      "rate": "61.634",
+      "date": "2026-09-30",
+      "fetchedAt": "2026-10-01T01:55:24.435Z"
+    },
+    "MMK": {
+      "rate": "2381.29",
+      "date": "2026-10-01",
+      "fetchedAt": "2026-10-01T01:55:24.435Z"
+    },
+    "MNT": {
+      "rate": "4079.64",
+      "date": "2026-09-30",
+      "fetchedAt": "2026-10-01T01:55:24.435Z"
+    },
+    "MOP": {
+      "rate": "9.1814",
+      "date": "2026-09-30",
+      "fetchedAt": "2026-10-01T01:55:24.435Z"
+    },
+    "MRU": {
+      "rate": "45.56",
+      "date": "2026-09-30",
+      "fetchedAt": "2026-10-01T01:55:24.435Z"
+    },
+    "MUR": {
+      "rate": "54.245",
+      "date": "2026-09-30",
+      "fetchedAt": "2026-10-01T01:55:24.435Z"
+    },
+    "MVR": {
+      "rate": "17.5332",
+      "date": "2026-09-30",
+      "fetchedAt": "2026-10-01T01:55:24.435Z"
+    },
+    "MWK": {
+      "rate": "1968.14",
+      "date": "2026-09-30",
+      "fetchedAt": "2026-10-01T01:55:24.435Z"
+    },
+    "MXN": {
+      "rate": "20.482",
+      "date": "2026-09-30",
+      "fetchedAt": "2026-10-01T01:55:24.435Z"
+    },
+    "MYR": {
+      "rate": "4.6313",
+      "date": "2026-10-01",
+      "fetchedAt": "2026-10-01T01:55:24.435Z"
+    },
+    "MZN": {
+      "rate": "72.349",
+      "date": "2026-09-30",
+      "fetchedAt": "2026-10-01T01:55:24.435Z"
+    },
+    "NAD": {
+      "rate": "18.6234",
+      "date": "2026-09-30",
+      "fetchedAt": "2026-10-01T01:55:24.435Z"
+    },
+    "NGN": {
+      "rate": "1508.71",
+      "date": "2026-10-01",
+      "fetchedAt": "2026-10-01T01:55:24.435Z"
+    },
+    "NIO": {
+      "rate": "41.578",
+      "date": "2026-09-30",
+      "fetchedAt": "2026-10-01T01:55:24.435Z"
+    },
+    "NOK": {
+      "rate": "10.8864",
+      "date": "2026-10-01",
+      "fetchedAt": "2026-10-01T01:55:24.435Z"
+    },
+    "NPR": {
+      "rate": "174.23",
+      "date": "2026-09-30",
+      "fetchedAt": "2026-10-01T01:55:24.435Z"
+    },
+    "NZD": {
+      "rate": "2.0091",
+      "date": "2026-10-01",
+      "fetchedAt": "2026-10-01T01:55:24.435Z"
+    },
+    "OMR": {
+      "rate": "0.43651",
+      "date": "2026-09-30",
+      "fetchedAt": "2026-10-01T01:55:24.435Z"
+    },
+    "PAB": {
+      "rate": "1.1356",
+      "date": "2026-09-30",
+      "fetchedAt": "2026-10-01T01:55:24.435Z"
+    },
+    "PEN": {
+      "rate": "3.9061",
+      "date": "2026-09-30",
+      "fetchedAt": "2026-10-01T01:55:24.435Z"
+    },
+    "PGK": {
+      "rate": "5.1097",
+      "date": "2026-10-01",
+      "fetchedAt": "2026-10-01T01:55:24.435Z"
+    },
+    "PHP": {
+      "rate": "71.082",
+      "date": "2026-10-01",
+      "fetchedAt": "2026-10-01T01:55:24.435Z"
+    },
+    "PKR": {
+      "rate": "315.1",
+      "date": "2026-09-30",
+      "fetchedAt": "2026-10-01T01:55:24.435Z"
+    },
+    "PLN": {
+      "rate": "4.3695",
+      "date": "2026-09-30",
+      "fetchedAt": "2026-10-01T01:55:24.435Z"
+    },
+    "PYG": {
+      "rate": "6634",
+      "date": "2026-09-30",
+      "fetchedAt": "2026-10-01T01:55:24.435Z"
+    },
+    "QAR": {
+      "rate": "4.1323",
+      "date": "2026-09-30",
+      "fetchedAt": "2026-10-01T01:55:24.435Z"
+    },
+    "RON": {
+      "rate": "5.2802",
+      "date": "2026-09-30",
+      "fetchedAt": "2026-10-01T01:55:24.435Z"
+    },
+    "RSD": {
+      "rate": "117.57",
+      "date": "2026-10-01",
+      "fetchedAt": "2026-10-01T01:55:24.435Z"
+    },
+    "RUB": {
+      "rate": "95.41",
+      "date": "2026-10-01",
+      "fetchedAt": "2026-10-01T01:55:24.435Z"
+    },
+    "RWF": {
+      "rate": "1674.44",
+      "date": "2026-09-30",
+      "fetchedAt": "2026-10-01T01:55:24.435Z"
+    },
+    "SAR": {
+      "rate": "4.2572",
+      "date": "2026-10-01",
+      "fetchedAt": "2026-10-01T01:55:24.435Z"
+    },
+    "SBD": {
+      "rate": "9.1137",
+      "date": "2026-09-30",
+      "fetchedAt": "2026-10-01T01:55:24.435Z"
+    },
+    "SCR": {
+      "rate": "16.6285",
+      "date": "2026-09-30",
+      "fetchedAt": "2026-10-01T01:55:24.435Z"
+    },
+    "SDG": {
+      "rate": "681.87",
+      "date": "2026-09-30",
+      "fetchedAt": "2026-10-01T01:55:24.435Z"
+    },
+    "SEK": {
+      "rate": "11.3325",
+      "date": "2026-10-01",
+      "fetchedAt": "2026-10-01T01:55:24.435Z"
+    },
+    "SGD": {
+      "rate": "1.4502",
+      "date": "2026-10-01",
+      "fetchedAt": "2026-10-01T01:55:24.435Z"
+    },
+    "SHP": {
+      "rate": "0.85635",
+      "date": "2026-09-30",
+      "fetchedAt": "2026-10-01T01:55:24.435Z"
+    },
+    "SLE": {
+      "rate": "27.747",
+      "date": "2026-09-30",
+      "fetchedAt": "2026-10-01T01:55:24.435Z"
+    },
+    "SOS": {
+      "rate": "649.07",
+      "date": "2026-09-30",
+      "fetchedAt": "2026-10-01T01:55:24.435Z"
+    },
+    "SRD": {
+      "rate": "42.771",
+      "date": "2026-09-30",
+      "fetchedAt": "2026-10-01T01:55:24.435Z"
+    },
+    "SSP": {
+      "rate": "6536",
+      "date": "2026-09-30",
+      "fetchedAt": "2026-10-01T01:55:24.435Z"
+    },
+    "STN": {
+      "rate": "24.536",
+      "date": "2026-09-30",
+      "fetchedAt": "2026-10-01T01:55:24.435Z"
+    },
+    "SVC": {
+      "rate": "9.9423",
+      "date": "2026-09-30",
+      "fetchedAt": "2026-10-01T01:55:24.435Z"
+    },
+    "SYP": {
+      "rate": "138.55",
+      "date": "2026-09-30",
+      "fetchedAt": "2026-10-01T01:55:24.435Z"
+    },
+    "SZL": {
+      "rate": "18.5957",
+      "date": "2026-09-30",
+      "fetchedAt": "2026-10-01T01:55:24.435Z"
+    },
+    "THB": {
+      "rate": "38.089",
+      "date": "2026-10-01",
+      "fetchedAt": "2026-10-01T01:55:24.435Z"
+    },
+    "TJS": {
+      "rate": "10.4754",
+      "date": "2026-09-30",
+      "fetchedAt": "2026-10-01T01:55:24.435Z"
+    },
+    "TMT": {
+      "rate": "3.9734",
+      "date": "2026-09-30",
+      "fetchedAt": "2026-10-01T01:55:24.435Z"
+    },
+    "TND": {
+      "rate": "3.3732",
+      "date": "2026-09-30",
+      "fetchedAt": "2026-10-01T01:55:24.435Z"
+    },
+    "TOP": {
+      "rate": "2.7123",
+      "date": "2026-09-30",
+      "fetchedAt": "2026-10-01T01:55:24.435Z"
+    },
+    "TRY": {
+      "rate": "55.631",
+      "date": "2026-10-01",
+      "fetchedAt": "2026-10-01T01:55:24.435Z"
+    },
+    "TTD": {
+      "rate": "7.6551",
+      "date": "2026-09-30",
+      "fetchedAt": "2026-10-01T01:55:24.435Z"
+    },
+    "TWD": {
+      "rate": "36.16",
+      "date": "2026-10-01",
+      "fetchedAt": "2026-10-01T01:55:24.435Z"
+    },
+    "TZS": {
+      "rate": "2995.65",
+      "date": "2026-09-30",
+      "fetchedAt": "2026-10-01T01:55:24.435Z"
+    },
+    "UAH": {
+      "rate": "50.848",
+      "date": "2026-09-30",
+      "fetchedAt": "2026-10-01T01:55:24.435Z"
+    },
+    "UGX": {
+      "rate": "4453.09",
+      "date": "2026-09-30",
+      "fetchedAt": "2026-10-01T01:55:24.435Z"
+    },
+    "USD": {
+      "rate": "1.1353",
+      "date": "2026-10-01",
+      "fetchedAt": "2026-10-01T01:55:24.435Z"
+    },
+    "UYU": {
+      "rate": "45.663",
+      "date": "2026-09-30",
+      "fetchedAt": "2026-10-01T01:55:24.435Z"
+    },
+    "UZS": {
+      "rate": "13414",
+      "date": "2026-09-30",
+      "fetchedAt": "2026-10-01T01:55:24.435Z"
+    },
+    "VES": {
+      "rate": "973.36",
+      "date": "2026-09-30",
+      "fetchedAt": "2026-10-01T01:55:24.435Z"
+    },
+    "VND": {
+      "rate": "29428",
+      "date": "2026-10-01",
+      "fetchedAt": "2026-10-01T01:55:24.435Z"
+    },
+    "VUV": {
+      "rate": "134.06",
+      "date": "2026-09-30",
+      "fetchedAt": "2026-10-01T01:55:24.435Z"
+    },
+    "WST": {
+      "rate": "3.1286",
+      "date": "2026-09-30",
+      "fetchedAt": "2026-10-01T01:55:24.435Z"
+    },
+    "XAF": {
+      "rate": "655.95",
+      "date": "2026-09-30",
+      "fetchedAt": "2026-10-01T01:55:24.435Z"
+    },
+    "XCD": {
+      "rate": "3.1026",
+      "date": "2026-09-30",
+      "fetchedAt": "2026-10-01T01:55:24.435Z"
+    },
+    "XCG": {
+      "rate": "2.0451",
+      "date": "2026-09-30",
+      "fetchedAt": "2026-10-01T01:55:24.435Z"
+    },
+    "XOF": {
+      "rate": "655.95",
+      "date": "2026-09-30",
+      "fetchedAt": "2026-10-01T01:55:24.435Z"
+    },
+    "XPF": {
+      "rate": "119.36",
+      "date": "2026-09-30",
+      "fetchedAt": "2026-10-01T01:55:24.435Z"
+    },
+    "YER": {
+      "rate": "268.59",
+      "date": "2026-09-30",
+      "fetchedAt": "2026-10-01T01:55:24.435Z"
+    },
+    "ZAR": {
+      "rate": "18.5843",
+      "date": "2026-10-01",
+      "fetchedAt": "2026-10-01T01:55:24.435Z"
+    },
+    "ZMW": {
+      "rate": "22.237",
+      "date": "2026-09-30",
+      "fetchedAt": "2026-10-01T01:55:24.435Z"
+    },
+    "ZWG": {
+      "rate": "30.436",
+      "date": "2026-09-30",
+      "fetchedAt": "2026-10-01T01:55:24.435Z"
+    }
+  }
+}
