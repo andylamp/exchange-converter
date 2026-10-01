@@ -105,6 +105,7 @@ jobs:
   deploy:
     name: Publish GitHub Pages
     needs: build
+    if: always() && !cancelled() && needs.build.result == 'success'
     runs-on: ubuntu-latest
     timeout-minutes: 10
     permissions:
