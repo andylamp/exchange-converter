@@ -398,7 +398,7 @@ export function App() {
                       </div>
                       <div class="currency-card-footer">
                         {code === 'EUR' ? (
-                          <span class="base-rate-label">EUR · Reference currency</span>
+                          <span class="base-rate-label">1 EUR = 1 EUR</span>
                         ) : (
                           <button
                             class="rate-edit-button"

@@ -1,6 +1,7 @@
 import { afterEach, describe, expect, it, vi } from 'vitest';
 import {
   addCurrency,
+  changeChartBase,
   convertAmount,
   createDefaultState,
   effectiveRate,
@@ -34,7 +35,7 @@ describe('currency calculations', () => {
     const state = removeCurrency(createDefaultState(fixture), 'GBP');
     expect(state.source).toBe('EUR');
     expect(state.amount).toBe('125');
-    expect(state.chart).toEqual({ base: 'EUR', quote: 'USD', range: '3M' });
+    expect(state.chart).toEqual({ base: 'EUR', quotes: ['USD'], range: '3M', mode: 'change' });
     expect(removeCurrency(state, 'USD')).toBe(state);
   });
   it('keeps very small derived source amounts valid after removing their old currency', () => {
@@ -117,5 +118,46 @@ describe('rate reconciliation', () => {
     const state = createDefaultState(fixture);
     state.quotes.GBP = { rate: '0.82', date: '2026-10-01', fetchedAt: '2026-10-01T10:00:00.000Z' };
     expect(reconcileState(state, fixture).state.quotes.GBP.rate).toBe('0.82');
+  });
+});
+
+describe('comparison preferences', () => {
+  it('starts with GBP against USD and EUR and labels change mode explicitly', () => {
+    expect(createDefaultState(fixture).chart).toEqual({
+      base: 'GBP',
+      quotes: ['USD', 'EUR'],
+      range: '3M',
+      mode: 'change',
+    });
+  });
+  it('swaps the old reference into targets when a comparison becomes the reference', () => {
+    const state = createDefaultState(fixture);
+    const changed = changeChartBase(state.chart, 'EUR', state.selected);
+    expect(changed).toEqual({ base: 'EUR', quotes: ['USD', 'GBP'], range: '3M', mode: 'change' });
+    expect(changeChartBase(changed, 'GBP', state.selected)).toEqual(state.chart);
+  });
+  it('keeps chosen targets when the new reference was not compared', () => {
+    const state = addCurrency(createDefaultState(fixture), 'JPY', fixture);
+    expect(changeChartBase(state.chart, 'JPY', state.selected).quotes).toEqual(['USD', 'EUR']);
+    expect(changeChartBase(state.chart, 'XXX', state.selected)).toBe(state.chart);
+  });
+  it('prunes removed currencies, repairs the reference, and preserves at least one target', () => {
+    const state = addCurrency(createDefaultState(fixture), 'JPY', fixture);
+    expect(removeCurrency(state, 'USD').chart.quotes).toEqual(['EUR']);
+    const filtered = { ...state, chart: { ...state.chart, quotes: ['JPY'] } };
+    expect(removeCurrency(filtered, 'JPY').chart.quotes).toEqual(['EUR']);
+    const noReference = removeCurrency(state, 'GBP');
+    expect(noReference.chart.base).toBe('EUR');
+    expect(noReference.chart.quotes).toEqual(['USD']);
+  });
+  it('repairs comparison preferences after catalogue changes', () => {
+    const state = addCurrency(createDefaultState(fixture), 'JPY', fixture);
+    state.chart = { base: 'JPY', quotes: ['USD', 'GBP'], range: '1Y', mode: 'rate' };
+    const available = {
+      ...fixture,
+      currencies: fixture.currencies.filter((c) => c.code !== 'JPY'),
+    };
+    const reconciled = reconcileState(state, available).state;
+    expect(reconciled.chart).toEqual({ base: 'GBP', quotes: ['USD'], range: '1Y', mode: 'rate' });
   });
 });

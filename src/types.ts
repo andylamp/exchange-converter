@@ -20,15 +20,22 @@ export interface LatestData {
   rates: Record<string, Quote>;
 }
 export type ChartRange = '1M' | '3M' | '1Y';
+export type ChartMode = 'rate' | 'change';
+export interface ChartPreferences {
+  base: string;
+  quotes: string[];
+  range: ChartRange;
+  mode: ChartMode;
+}
 export interface SavedState {
-  version: 1;
+  version: 2;
   selected: string[];
   source: string;
   amount: string;
   quotes: Record<string, Quote>;
   custom: Record<string, CustomRate>;
   lastChecked: string | null;
-  chart: { base: string; quote: string; range: ChartRange };
+  chart: ChartPreferences;
 }
 export interface HistoryData {
   schemaVersion: 1;
@@ -40,4 +47,16 @@ export interface HistoryData {
 export interface ChartPoint {
   date: string;
   rate: string;
+}
+export interface ComparisonSeries {
+  code: string;
+  points: ChartPoint[];
+}
+export interface ComparisonPoint extends ChartPoint {
+  value: string;
+}
+export interface PreparedComparison {
+  series: { code: string; points: ComparisonPoint[] }[];
+  baselineDate: string | null;
+  excluded: string[];
 }

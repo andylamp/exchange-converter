@@ -1,6 +1,6 @@
 import Decimal from 'decimal.js';
 import { decimalRate } from './data-validation';
-import type { LatestData, Quote, SavedState } from './types';
+import type { ChartPreferences, LatestData, Quote, SavedState } from './types';
 
 Decimal.set({ precision: 40, rounding: Decimal.ROUND_HALF_UP });
 export const MAX_CURRENCIES = 12;
@@ -12,7 +12,7 @@ export function isValidAmount(text: string): boolean {
 }
 export function createDefaultState(latest: LatestData): SavedState {
   return {
-    version: 1,
+    version: 2,
     selected: ['GBP', 'EUR', 'USD'],
     source: 'GBP',
     amount: '100',
@@ -21,8 +21,30 @@ export function createDefaultState(latest: LatestData): SavedState {
     ),
     custom: {},
     lastChecked: null,
-    chart: { base: 'GBP', quote: 'USD', range: '3M' },
+    chart: { base: 'GBP', quotes: ['USD', 'EUR'], range: '3M', mode: 'change' },
   };
+}
+export function normalizeChart(chart: ChartPreferences, selected: string[]): ChartPreferences {
+  const base = selected.includes(chart.base) ? chart.base : selected[0];
+  const quotes = [...new Set(chart.quotes)].filter(
+    (code) => code !== base && selected.includes(code),
+  );
+  if (!quotes.length) {
+    const fallback = selected.find((code) => code !== base);
+    if (fallback) quotes.push(fallback);
+  }
+  return { ...chart, base, quotes };
+}
+export function changeChartBase(
+  chart: ChartPreferences,
+  base: string,
+  selected: string[],
+): ChartPreferences {
+  if (!selected.includes(base) || base === chart.base) return chart;
+  return normalizeChart(
+    { ...chart, base, quotes: chart.quotes.map((code) => (code === base ? chart.base : code)) },
+    selected,
+  );
 }
 export function mergeQuotes(
   state: SavedState,
@@ -66,12 +88,7 @@ export function reconcileState(
       : new Decimal(convertAmount(saved.amount, saved.source, source, saved) ?? '100')
           .toSignificantDigits(15)
           .toString();
-  const chart = {
-    ...saved.chart,
-    base: selected.includes(saved.chart.base) ? saved.chart.base : selected[0],
-    quote: selected.includes(saved.chart.quote) ? saved.chart.quote : selected[1],
-  };
-  if (chart.base === chart.quote) chart.quote = selected.find((c) => c !== chart.base)!;
+  const chart = normalizeChart(saved.chart, selected);
   const quotes = Object.fromEntries(
     selected.filter((c) => saved.quotes[c]).map((c) => [c, saved.quotes[c]]),
   );
@@ -144,11 +161,6 @@ export function removeCurrency(state: SavedState, code: string): SavedState {
   delete quotes[code];
   const custom = { ...state.custom };
   delete custom[code];
-  const base = state.chart.base === code ? selected[0] : state.chart.base;
-  const quote =
-    state.chart.quote === code || state.chart.quote === base
-      ? selected.find((c) => c !== base)!
-      : state.chart.quote;
   return {
     ...state,
     selected,
@@ -156,6 +168,6 @@ export function removeCurrency(state: SavedState, code: string): SavedState {
     amount,
     quotes,
     custom,
-    chart: { ...state.chart, base, quote },
+    chart: normalizeChart(state.chart, selected),
   };
 }

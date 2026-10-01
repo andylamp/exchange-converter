@@ -26,6 +26,7 @@ describe('cookie persistence', () => {
       'DKK',
       'NZD',
     ];
+    state.chart.quotes = state.selected.filter((code) => code !== state.chart.base);
     state.amount = '12345678901234567890123456789.12';
     for (const code of state.selected) {
       state.quotes[code] = {
@@ -53,5 +54,35 @@ describe('cookie persistence', () => {
     const encoded = JSON.parse(decodeURIComponent(encodeState(createDefaultState(fixture))));
     encoded[1][1][0] = 'GBP';
     expect(() => decodeState(encodeURIComponent(JSON.stringify(encoded)))).toThrow();
+  });
+  it('migrates legacy single-pair cookies without losing saved conversion state', () => {
+    const state = createDefaultState(fixture);
+    state.amount = '42.5';
+    state.custom.GBP = { rate: '0.75', editedAt: '2026-09-30T18:00:00.000Z' };
+    state.lastChecked = '2026-09-30T19:00:00.000Z';
+    const legacy = JSON.parse(decodeURIComponent(encodeState(state)));
+    legacy[0] = 1;
+    legacy[5] = ['GBP', 'USD', '1Y'];
+    const restored = decodeState(encodeURIComponent(JSON.stringify(legacy)));
+    expect(restored).toEqual({
+      ...state,
+      version: 2,
+      chart: { base: 'GBP', quotes: ['USD'], range: '1Y', mode: 'rate' },
+    });
+    expect(JSON.parse(decodeURIComponent(encodeState(restored)))[0]).toBe(2);
+  });
+  it('rejects invalid multi-currency selections and unknown view modes', () => {
+    const original = JSON.parse(decodeURIComponent(encodeState(createDefaultState(fixture))));
+    for (const chart of [
+      ['GBP', [], '3M', 'rate'],
+      ['GBP', ['GBP'], '3M', 'rate'],
+      ['GBP', ['USD', 'USD'], '3M', 'rate'],
+      ['GBP', ['JPY'], '3M', 'rate'],
+      ['GBP', ['USD'], '3M', 'unknown'],
+    ]) {
+      expect(() =>
+        decodeState(encodeURIComponent(JSON.stringify([...original.slice(0, 5), chart]))),
+      ).toThrow();
+    }
   });
 });

@@ -1,7 +1,8 @@
 import { isValidAmount, MAX_CURRENCIES } from './core';
 import { decimalRate, isTimestamp, validateQuote } from './data-validation';
-import type { ChartRange, SavedState } from './types';
+import type { ChartMode, ChartRange, SavedState } from './types';
 
+// Keep the cookie name so existing sessions can be migrated in place; the payload is versioned.
 export const COOKIE_NAME = 'exchange_converter_v1';
 export const COOKIE_PATH = '/exchange-converter/';
 export const MAX_COOKIE_BYTES = 3500;
@@ -19,12 +20,12 @@ export function encodeState(state: SavedState): string {
   });
   const value = encodeURIComponent(
     JSON.stringify([
-      1,
+      2,
       rows,
       state.source,
       state.amount,
       state.lastChecked ? Date.parse(state.lastChecked) : null,
-      [state.chart.base, state.chart.quote, state.chart.range],
+      [state.chart.base, state.chart.quotes, state.chart.range, state.chart.mode],
     ]),
   );
   if (new TextEncoder().encode(`${COOKIE_NAME}=${value}`).length > MAX_COOKIE_BYTES)
@@ -37,7 +38,7 @@ export function decodeState(value: string): SavedState {
   if (
     !Array.isArray(data) ||
     data.length !== 6 ||
-    data[0] !== 1 ||
+    ![1, 2].includes(data[0]) ||
     !Array.isArray(data[1]) ||
     data[1].length < 2 ||
     data[1].length > MAX_CURRENCIES ||
@@ -93,13 +94,22 @@ export function decodeState(value: string): SavedState {
   const c: unknown = data[5];
   if (
     !Array.isArray(c) ||
-    c.length !== 3 ||
+    c.length !== (data[0] === 1 ? 3 : 4) ||
     !selected.includes(c[0]) ||
-    !selected.includes(c[1]) ||
-    c[0] === c[1] ||
     !['1M', '3M', '1Y'].includes(c[2])
   )
     throw new Error('Invalid saved chart.');
+  const targets: unknown = data[0] === 1 ? [c[1]] : c[1];
+  const mode: unknown = data[0] === 1 ? 'rate' : c[3];
+  if (
+    !Array.isArray(targets) ||
+    targets.length < 1 ||
+    targets.length >= selected.length ||
+    targets.some((code) => typeof code !== 'string' || !selected.includes(code) || code === c[0]) ||
+    new Set(targets).size !== targets.length ||
+    (mode !== 'rate' && mode !== 'change')
+  )
+    throw new Error('Invalid saved comparison currencies.');
   let lastChecked: string | null = null;
   if (data[4] !== null) {
     if (typeof data[4] !== 'number' || data[4] > Date.now() + 300000)
@@ -107,14 +117,14 @@ export function decodeState(value: string): SavedState {
     lastChecked = new Date(data[4]).toISOString();
   }
   return {
-    version: 1,
+    version: 2,
     selected,
     source: data[2],
     amount: data[3],
     quotes,
     custom,
     lastChecked,
-    chart: { base: c[0], quote: c[1], range: c[2] as ChartRange },
+    chart: { base: c[0], quotes: targets, range: c[2] as ChartRange, mode: mode as ChartMode },
   };
 }
 export function readSavedState(): { state: SavedState | null; warning: string | null } {

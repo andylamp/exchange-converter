@@ -13,7 +13,8 @@ A lightweight, responsive currency converter that runs entirely on GitHub Pages.
 - Edit any currency amount, with decimal arithmetic and currency-aware display precision.
 - Refresh reference rates manually or let the app check for updates every 24 hours while in use.
 - Enter a custom rate, inspect its date, and reset it to the provider rate.
-- Explore currency-pair history over one month, three months, or one year.
+- Compare multiple currencies on one history chart over one month, three months, or one year.
+- Choose a visible reference currency and switch between rates and percentage changes.
 - Restore browser state across visits and clear it from the interface.
 - Use the bundled rates when an upstream request fails, with visible rate dates and error feedback.
 - Navigate the responsive interface using a keyboard or a touch screen.
@@ -33,13 +34,19 @@ Rate selection follows these rules:
 3. A provider observation dated after the custom edit replaces the custom rate. The interface reports replacements; resetting an override immediately returns to the stored provider quote.
 4. Missing or invalid responses never erase a last valid quote. Each currency retains its own observation date.
 
-Charts show provider observations, not custom rates. Currency-pair points use observations available on matching dates, with missing periods represented honestly. Currency coverage and the length of available history vary.
+The history chart has a visible **Reference currency** selector and **Compare against** checkboxes for the other selected conversion currencies. Keep between 1 and 11 comparisons on the chart. Adding a conversion card makes that currency available without changing your chart filters; removing a card removes it from the chart choices. If you choose a compared currency as the reference, the previous reference takes its place among the comparisons.
+
+**Rates** shows units of each compared currency per 1 reference currency. **% change** shows how those rates have changed since the earliest date shared by the available comparison series in the selected period. Every line starts from the same observation date; a positive change means one unit of the reference buys more of that currency. New sessions compare USD and EUR against GBP in percentage-change mode over three months.
+
+Charts show provider observations, not custom rates. Pair calculations use matching observation dates and never carry missing values forward. Gaps longer than four days break the lines. If one currency's history cannot be loaded, the remaining comparisons stay available and the interface identifies the missing currency. When series have no shared baseline date, switch to Rates to view their available history. The expandable data table includes raw rates, percentage changes when available, and dashes for missing observations. Currency coverage and the length of available history vary.
 
 The application code is [MIT licensed](LICENSE). Exchange-rate data remains subject to the [upstream providers' terms](https://frankfurter.dev/license/); the application license does not relicense that data. [Frankfurter's documentation](https://frankfurter.dev/) describes its sources and service limits.
 
 ## Browser state and privacy
 
 A versioned cookie stores the selected currencies, authoritative amount, selected quote snapshots, custom rates, refresh time, and chart preferences. The encoded value is bounded to 3.5 KB. It is scoped to `/exchange-converter/`, uses `SameSite=Lax`, has a 365-day requested lifetime, and uses `Secure` on HTTPS. Browsers may clear or expire it sooner. Malformed or incompatible state falls back to defaults. When persistence is unavailable, the app remains usable and reports the limitation.
+
+Existing cookies from the single-pair chart migrate automatically: their amounts, currency choices, rate overrides, and date range are preserved, and the former pair becomes one comparison in Rates mode. New saves use cookie format version 2 under the existing cookie name; no manual reset is required.
 
 There is no server-side user-state storage, localStorage, analytics, or tracking integration. Cookies are still readable by JavaScript and are sent by browsers with matching requests to the Pages host; cookie paths do not isolate separate apps on the same origin. Requests to Frankfurter contain currency and date parameters, never your entered amount or this app's cookies. GitHub Pages and the rate provider remain external services with their own policies. Use the app's clear/reset control or browser site-data controls to remove saved state.
 

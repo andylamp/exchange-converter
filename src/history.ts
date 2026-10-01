@@ -1,5 +1,14 @@
 import Decimal from 'decimal.js';
-import type { ChartPoint, ChartRange, HistoryData } from './types';
+import type {
+  ChartMode,
+  ChartPoint,
+  ChartRange,
+  ComparisonSeries,
+  HistoryData,
+  PreparedComparison,
+} from './types';
+
+const ComparisonDecimal = Decimal.clone({ precision: 40, rounding: Decimal.ROUND_HALF_UP });
 
 export function pairSeries(base: HistoryData, quote: HistoryData): ChartPoint[] {
   if (base.quote === quote.quote) return base.points.map(([date]) => ({ date, rate: '1' }));
@@ -28,4 +37,65 @@ export function filterRange(
   const earliest = start.toISOString().slice(0, 10);
   const latest = now.toISOString().slice(0, 10);
   return points.filter((point) => point.date >= earliest && point.date <= latest);
+}
+
+export function prepareComparison(
+  series: ComparisonSeries[],
+  range: ChartRange,
+  mode: ChartMode,
+  now = new Date(),
+): PreparedComparison {
+  const filtered = series.map(({ code, points }) => ({
+    code,
+    points: filterRange(points, range, now),
+  }));
+  const excluded = filtered.filter(({ points }) => points.length === 0).map(({ code }) => code);
+  if (mode === 'rate') {
+    return {
+      series: filtered.map(({ code, points }) => ({
+        code,
+        points: points.map((point) => ({ ...point, value: point.rate })),
+      })),
+      baselineDate: null,
+      excluded,
+    };
+  }
+
+  const available = filtered.filter(({ points }) => points.length > 0);
+  const sharedDates = new Set(available[0]?.points.map(({ date }) => date) ?? []);
+  for (const { points } of available.slice(1)) {
+    const dates = new Set(points.map(({ date }) => date));
+    for (const date of sharedDates) if (!dates.has(date)) sharedDates.delete(date);
+  }
+  const baselineDate = [...sharedDates].sort()[0] ?? null;
+  if (baselineDate === null) {
+    return {
+      series: filtered.map(({ code }) => ({ code, points: [] })),
+      baselineDate: null,
+      excluded,
+    };
+  }
+
+  return {
+    series: filtered.map(({ code, points }) => {
+      const baseline = points.find(({ date }) => date === baselineDate);
+      return {
+        code,
+        points: baseline
+          ? points
+              .filter(({ date }) => date >= baselineDate)
+              .map((point) => ({
+                ...point,
+                value: new ComparisonDecimal(point.rate)
+                  .div(baseline.rate)
+                  .minus(1)
+                  .times(100)
+                  .toString(),
+              }))
+          : [],
+      };
+    }),
+    baselineDate,
+    excluded,
+  };
 }
