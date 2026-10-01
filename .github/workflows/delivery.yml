@@ -85,7 +85,7 @@ jobs:
           node-version: 24
           cache: npm
       - run: npm ci
-      - uses: actions/configure-pages@983d7736d9b0ae728b81ab479565c72886d7745b # v5
+      - uses: actions/configure-pages@45bfe0192ca1faeb007ade9deae92b16b8254a0d # v6.0.0
       - run: npm run verify
       - run: npx playwright install --with-deps chromium firefox webkit
       - run: npm run test:e2e
