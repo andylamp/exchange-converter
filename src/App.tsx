@@ -130,7 +130,7 @@ export function App() {
     } catch {
       if (!controller.signal.aborted)
         setNotice(
-          'The rate provider is unavailable. Your saved and bundled rates are still ready to use. Try refreshing again later.',
+          'The rate provider is unavailable. Using saved or default rates. Try refreshing again later.',
         );
     } finally {
       if (refreshController.current === controller) {
@@ -206,23 +206,19 @@ export function App() {
           </span>
         </a>
         <span class="header-note">
-          <Icon name="shield" width="15" height="15" /> Private by design
+          <Icon name="shield" width="15" height="15" /> Saved in your browser
         </span>
       </header>
       <main class="page-width">
         <section class="hero" aria-labelledby="page-heading">
           <div>
             <span class="eyebrow">
-              <span class="status-dot" /> A LITTLE CLARITY, IN ANY CURRENCY
+              <span class="status-dot" /> DAILY EXCHANGE RATES
             </span>
-            <h1 id="page-heading">
-              A world of currencies.
-              <br />
-              <span>One simple conversion.</span>
-            </h1>
+            <h1 id="page-heading">Currency converter</h1>
             <p>
-              Plan a trip. Compare a price. Follow a hunch.
-              <br class="desktop-break" /> Your currencies, together in one place.
+              Choose your currencies and enter an amount.
+              <br class="desktop-break" /> The other amounts update automatically.
             </p>
           </div>
           <div class="hero-aside" aria-hidden="true">
@@ -240,7 +236,7 @@ export function App() {
           <section id="converter" class="boot-state" aria-live="polite">
             {loadingError ? (
               <>
-                <h2>Let’s try that again.</h2>
+                <h2>Unable to load rates</h2>
                 <p>{loadingError}</p>
                 <button class="button primary" onClick={() => setBootAttempt((value) => value + 1)}>
                   Retry loading
@@ -249,7 +245,7 @@ export function App() {
             ) : (
               <>
                 <span class="loading-line" />
-                <p>Getting your currencies ready…</p>
+                <p>Loading exchange rates…</p>
               </>
             )}
           </section>
@@ -273,7 +269,7 @@ export function App() {
                   <h2 id="converter-heading">
                     Your currencies <span class="count-badge">{state.selected.length}</span>
                   </h2>
-                  <p class="small muted">Edit any amount. The rest follow.</p>
+                  <p class="small muted">Edit an amount to update all currencies.</p>
                 </div>
                 <div class="rate-controls">
                   <span class={`rate-status ${stale ? 'stale' : ''}`}>
@@ -468,7 +464,7 @@ export function App() {
                 <Icon name="globe" width="22" height="22" />
               </div>
               <div>
-                <h2>Daily rates. A considered starting point.</h2>
+                <h2>About the exchange rates</h2>
                 <p>
                   Rates from{' '}
                   <a href="https://frankfurter.dev/" target="_blank" rel="noreferrer">
@@ -528,7 +524,7 @@ export function App() {
           <a class="footer-brand" href={import.meta.env.BASE_URL}>
             exchange / converter
           </a>
-          <p>A small tool for a connected world.</p>
+          <p>Currency conversion and rate history.</p>
         </div>
         <div class="footer-links">
           {state && (

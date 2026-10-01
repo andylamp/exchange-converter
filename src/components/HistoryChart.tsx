@@ -269,10 +269,10 @@ export function HistoryChart({
     <section class="history-section" aria-labelledby="history-heading">
       <div class="section-heading">
         <div>
-          <span class="eyebrow">THE BIGGER PICTURE</span>
-          <h2 id="history-heading">Every rate has a history.</h2>
+          <span class="eyebrow">RATE HISTORY</span>
+          <h2 id="history-heading">Exchange rates over time</h2>
         </div>
-        <p class="section-caption">A little perspective for your next move.</p>
+        <p class="section-caption">Up to one year of daily rates.</p>
       </div>
       <div class="history-card">
         <div class="chart-toolbar">
@@ -336,7 +336,7 @@ export function HistoryChart({
         {loading ? (
           <div class="chart-placeholder" role="status">
             <span class="loading-line" />
-            <p>Finding the bigger picture…</p>
+            <p>Loading historical rates…</p>
           </div>
         ) : error ? (
           <div class="chart-placeholder">

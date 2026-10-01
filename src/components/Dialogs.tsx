@@ -79,7 +79,7 @@ export function CurrencyPicker({
   return (
     <Modal
       title="Add a currency"
-      description={`Find your next currency. ${selected.length} of 12 selected.`}
+      description={`Search by name or code. ${selected.length} of 12 selected.`}
       onClose={onClose}
     >
       <label class="sr-only" for="currency-search">
@@ -146,7 +146,7 @@ export function RateEditor({
   return (
     <Modal
       title={`Your ${code} exchange rate`}
-      description="Use a personal rate for your calculations. Historical charts always show provider rates."
+      description="Set a custom rate for your calculations. Historical charts show provider rates."
       onClose={onClose}
     >
       <form
