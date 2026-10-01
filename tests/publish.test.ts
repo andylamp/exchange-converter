@@ -27,6 +27,7 @@ let environment: NodeJS.ProcessEnv;
 interface ApiRequest {
   query: string;
   variables: {
+    qualifiedRef?: string;
     input?: {
       branch: { repositoryNameWithOwner: string; branchName: string };
       expectedHeadOid: string;
@@ -141,6 +142,31 @@ afterEach(() => {
 });
 
 describe('verified commit publisher', () => {
+  it('publishes to an explicit existing branch without changing the local checkout', () => {
+    changedData();
+    const result = run(['--data-only', '--branch', 'automation/rates-123-1']);
+    expect(result.status, result.stderr).toBe(0);
+    const calls = requests();
+    expect(calls[0].variables.qualifiedRef).toBe('refs/heads/automation/rates-123-1');
+    expect(calls[1].variables.input!.branch).toEqual({
+      repositoryNameWithOwner: 'owner/example',
+      branchName: 'automation/rates-123-1',
+    });
+    expect(calls[1].variables.input!.expectedHeadOid).toBe(head);
+    expect(git('branch', '--show-current')).toBe('main');
+    expect(readFileSync(output, 'utf8')).toBe(`commit_oid=${publishedOid}\n`);
+  });
+
+  it.each(['../main', 'refs/heads/main', 'bad..branch', 'topic.lock', 'topic@{1}', 'a//b'])(
+    'rejects invalid or qualified branch %s before API access',
+    (branch) => {
+      changedData();
+      const result = run(['--branch', branch]);
+      expect(result.status).not.toBe(0);
+      expect(requests()).toEqual([]);
+      expect(readFileSync(output, 'utf8')).toBe('');
+    },
+  );
   it('previews tracked changes and untracked additions without contacting GitHub', () => {
     changedData();
     writeFileSync(join(repository, '.env'), 'never-upload-this\n');
