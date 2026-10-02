@@ -242,7 +242,7 @@ test('migrates an existing single-pair cookie without losing the entered amount 
       );
       return saved ? JSON.parse(decodeURIComponent(saved.value))[0] : null;
     })
-    .toBe(2);
+    .toBe(3);
   await page.reload();
   await expect(page.getByLabel('USD amount')).toHaveValue('123.45');
   await expect(reference(page)).toHaveValue('EUR');

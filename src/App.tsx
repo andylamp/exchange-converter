@@ -6,6 +6,8 @@ import {
   effectiveRate,
   formatAmount,
   isValidAmount,
+  isValidMarkupPercent,
+  markupAmount,
   mergeQuotes,
   reconcileState,
   removeCurrency,
@@ -38,6 +40,7 @@ export function App() {
   const [pickerOpen, setPickerOpen] = useState(false);
   const [editingRate, setEditingRate] = useState<string | null>(null);
   const [draft, setDraft] = useState<{ code: string; text: string } | null>(null);
+  const [markupDraft, setMarkupDraft] = useState<string | null>(null);
   const stateRef = useRef<SavedState | null>(null);
   const refreshingRef = useRef(false);
   const shouldPersist = useRef(false);
@@ -120,11 +123,20 @@ export function App() {
         const replaced = result.replacedCustom.length
           ? ` Newer provider rates replaced your custom rates for ${result.replacedCustom.join(', ')}.`
           : '';
-        setNotice(
-          complete
-            ? `Rates checked successfully. Daily rates may be unchanged.${replaced}`
-            : `Some rates could not be refreshed. Your existing rates are still available.${replaced}`,
-        );
+        if (!complete) {
+          setNotice(
+            `Some rates could not be refreshed. Your existing rates are still available.${replaced}`,
+          );
+        } else if (manual || replaced) {
+          setNotice(`Rates checked successfully. Daily rates may be unchanged.${replaced}`);
+        } else {
+          setNotice((previousNotice) =>
+            previousNotice.startsWith('The rate provider is unavailable.') ||
+            previousNotice.startsWith('Some rates could not be refreshed.')
+              ? ''
+              : previousNotice,
+          );
+        }
         return result.state;
       });
     } catch {
@@ -169,6 +181,7 @@ export function App() {
     shouldPersist.current = false;
     setState(createDefaultState(latest));
     setDraft(null);
+    setMarkupDraft(null);
     setWarning('');
     setNotice(
       'Saved state cleared. Default currencies restored. Your next change will start a new saved session.',
@@ -190,6 +203,9 @@ export function App() {
       : `${readableDate(oldestDate)} – ${readableDate(newestDate!)}`
     : 'Awaiting rates';
   const stale = Boolean(oldestDate && Date.now() - Date.parse(oldestDate) > 7 * DAY);
+  const invalidMarkup = Boolean(
+    state?.markup.enabled && markupDraft !== null && !isValidMarkupPercent(markupDraft),
+  );
 
   return (
     <>
@@ -211,26 +227,8 @@ export function App() {
       </header>
       <main class="page-width">
         <section class="hero" aria-labelledby="page-heading">
-          <div>
-            <span class="eyebrow">
-              <span class="status-dot" /> DAILY EXCHANGE RATES
-            </span>
-            <h1 id="page-heading">Currency converter</h1>
-            <p>
-              Choose your currencies and enter an amount.
-              <br class="desktop-break" /> The other amounts update automatically.
-            </p>
-          </div>
-          <div class="hero-aside" aria-hidden="true">
-            <span class="orbit orbit-one" />
-            <span class="orbit orbit-two" />
-            <span class="floating-currency floating-euro">€</span>
-            <span class="floating-currency floating-pound">£</span>
-            <span class="floating-currency floating-dollar">$</span>
-            <span class="orbit-center">
-              <Icon name="arrow" width="32" height="32" />
-            </span>
-          </div>
+          <h1 id="page-heading">Currency converter</h1>
+          <p>Enter an amount to convert it across your selected currencies.</p>
         </section>
         {!state || !latest ? (
           <section id="converter" class="boot-state" aria-live="polite">
@@ -269,7 +267,6 @@ export function App() {
                   <h2 id="converter-heading">
                     Your currencies <span class="count-badge">{state.selected.length}</span>
                   </h2>
-                  <p class="small muted">Edit an amount to update all currencies.</p>
                 </div>
                 <div class="rate-controls">
                   <span class={`rate-status ${stale ? 'stale' : ''}`}>
@@ -304,6 +301,63 @@ export function App() {
                   </button>
                 </div>
               )}
+              <div class={`markup-controls ${state.markup.enabled ? 'markup-enabled' : ''}`}>
+                <div class="markup-description">
+                  <label class="markup-toggle">
+                    <input
+                      type="checkbox"
+                      checked={state.markup.enabled}
+                      aria-label="Add markup"
+                      aria-describedby="markup-help"
+                      onChange={(event) => {
+                        const enabled = event.currentTarget.checked;
+                        setMarkupDraft(null);
+                        updateState((previous) => ({
+                          ...previous,
+                          markup: { ...previous.markup, enabled },
+                        }));
+                      }}
+                    />
+                    <span class="switch-track" aria-hidden="true" />
+                    <span>Add markup</span>
+                  </label>
+                  <p id="markup-help">Add the same percentage to each amount.</p>
+                </div>
+                <label class="markup-percentage" for="markup-percentage">
+                  <span>Markup percentage</span>
+                  <span class="markup-input-wrap">
+                    <input
+                      id="markup-percentage"
+                      aria-label="Markup percentage"
+                      inputMode="decimal"
+                      autoComplete="off"
+                      spellcheck={false}
+                      maxLength={10}
+                      disabled={!state.markup.enabled}
+                      value={markupDraft ?? state.markup.percent}
+                      aria-invalid={invalidMarkup}
+                      aria-describedby={invalidMarkup ? 'markup-error' : 'markup-help'}
+                      onFocus={(event) => setMarkupDraft(event.currentTarget.value)}
+                      onInput={(event) => {
+                        const percent = event.currentTarget.value;
+                        setMarkupDraft(percent);
+                        if (isValidMarkupPercent(percent))
+                          updateState((previous) => ({
+                            ...previous,
+                            markup: { ...previous.markup, percent },
+                          }));
+                      }}
+                      onBlur={() => setMarkupDraft(null)}
+                    />
+                    <span aria-hidden="true">%</span>
+                  </span>
+                </label>
+                {invalidMarkup && (
+                  <p id="markup-error" class="markup-error">
+                    Enter a percentage from 0 to 1,000. Using the last valid percentage.
+                  </p>
+                )}
+              </div>
               <div class="currency-grid">
                 {state.selected.map((code) => {
                   const currency = latest.currencies.find((item) => item.code === code);
@@ -316,6 +370,10 @@ export function App() {
                         : converted === null
                           ? ''
                           : formatAmount(converted, code);
+                  const markedUp =
+                    state.markup.enabled && converted !== null
+                      ? markupAmount(converted, state.markup.percent)
+                      : null;
                   const rate = effectiveRate(state, code);
                   const custom = state.custom[code];
                   const invalidDraft =
@@ -353,13 +411,12 @@ export function App() {
                       </div>
                       <div class="amount-heading">
                         <label for={`amount-${code}`}>
-                          {state.source === code ? 'Your amount' : 'Converted amount'}
+                          {state.markup.enabled
+                            ? 'Original amount'
+                            : state.source === code
+                              ? 'Your amount'
+                              : 'Converted amount'}
                         </label>
-                        {state.source === code && (
-                          <span class="input-indicator">
-                            <span /> EDITING
-                          </span>
-                        )}
                       </div>
                       <div class="amount-input-wrap">
                         <input
@@ -396,6 +453,23 @@ export function App() {
                             ? 'No rate available. Refresh to try again.'
                             : '\u00a0'}
                       </div>
+                      {state.markup.enabled && (
+                        <div class="markup-result">
+                          <span>
+                            With{' '}
+                            {Number(state.markup.percent).toLocaleString('en-GB', {
+                              maximumFractionDigits: 9,
+                            })}
+                            % markup
+                          </span>
+                          <div>
+                            <output aria-label={`${code} amount with markup`} aria-live="off">
+                              {markedUp === null ? '—' : formatAmount(markedUp, code)}
+                            </output>
+                            <span>{code}</span>
+                          </div>
+                        </div>
+                      )}
                       <div class="currency-card-footer">
                         {code === 'EUR' ? (
                           <span class="base-rate-label">1 EUR = 1 EUR</span>
@@ -448,10 +522,6 @@ export function App() {
                   {state.selected.length >= 12 ? '12 currencies selected' : 'Add currency'}
                   <span>{state.selected.length}/12</span>
                 </button>
-                <p>
-                  <Icon name="shield" width="14" height="14" />
-                  Preferences stay in your browser.
-                </p>
               </div>
             </section>
             <HistoryChart
@@ -475,7 +545,6 @@ export function App() {
                   currency.
                 </p>
               </div>
-              <span class="info-tag">NO ACCOUNT NEEDED</span>
             </section>
             {pickerOpen && (
               <CurrencyPicker
@@ -524,7 +593,6 @@ export function App() {
           <a class="footer-brand" href={import.meta.env.BASE_URL}>
             exchange / converter
           </a>
-          <p>Currency conversion and rate history.</p>
         </div>
         <div class="footer-links">
           {state && (

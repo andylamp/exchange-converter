@@ -121,6 +121,7 @@ function Plot({
         role="img"
         tabIndex={0}
         aria-labelledby={`${id}-title ${id}-desc`}
+        onFocus={() => setHover(dates.length - 1)}
         onPointerLeave={() => setHover(null)}
         onBlur={() => setHover(null)}
         onPointerMove={(event) => {
@@ -289,27 +290,31 @@ function Plot({
           })}
         </div>
       )}
-      <div class="comparison-readout" aria-live="polite">
-        <p>
-          {fullDate(activeDate)} · Units per 1 {base}
-        </p>
-        <ul>
-          {codes.map((code, index) => {
-            const point = byCode.get(code)?.get(activeDate);
-            return (
-              <li key={code}>
-                <SeriesMark index={index} />
-                <strong>{code}</strong>
-                <span>
-                  {point ? chartNumber(Number(point.rate)) : '—'}
-                  {point && mode === 'change' && (
-                    <span class="muted"> ({percentNumber(point.value)})</span>
-                  )}
-                </span>
-              </li>
-            );
-          })}
-        </ul>
+      <div class="comparison-readout sr-only" aria-live="polite">
+        {hover !== null && (
+          <>
+            <p>
+              {fullDate(activeDate)} · Units per 1 {base}
+            </p>
+            <ul>
+              {codes.map((code, index) => {
+                const point = byCode.get(code)?.get(activeDate);
+                return (
+                  <li key={code}>
+                    <SeriesMark index={index} />
+                    <strong>{code}</strong>
+                    <span>
+                      {point ? chartNumber(Number(point.rate)) : '—'}
+                      {point && mode === 'change' && (
+                        <span class="muted"> ({percentNumber(point.value)})</span>
+                      )}
+                    </span>
+                  </li>
+                );
+              })}
+            </ul>
+          </>
+        )}
       </div>
     </div>
   );
@@ -425,11 +430,7 @@ export function HistoryChart({
   return (
     <section class="history-section" aria-labelledby="history-heading">
       <div class="section-heading">
-        <div>
-          <span class="eyebrow">RATE HISTORY</span>
-          <h2 id="history-heading">Exchange rates over time</h2>
-        </div>
-        <p class="section-caption">Up to one year of daily rates.</p>
+        <h2 id="history-heading">Exchange rates over time</h2>
       </div>
       <div class="history-card comparison-card">
         <div class="chart-toolbar comparison-toolbar">
@@ -626,6 +627,9 @@ export function HistoryChart({
               : 'Custom rates excluded'}
           </span>
         </div>
+        {state.markup.enabled && (
+          <p class="custom-chart-note">Historical rates do not include your markup.</p>
+        )}
         {(state.custom[base] || quotes.some((code) => state.custom[code])) && (
           <p class="custom-chart-note">
             Your conversion uses a custom rate. This chart shows provider history.

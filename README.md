@@ -3,7 +3,7 @@
 [![Delivery](https://github.com/andylamp/exchange-converter/actions/workflows/delivery.yml/badge.svg)](https://github.com/andylamp/exchange-converter/actions/workflows/delivery.yml)
 [![MIT license](https://img.shields.io/badge/license-MIT-blue.svg)](LICENSE)
 
-A lightweight, responsive currency converter that runs entirely on GitHub Pages. Edit any amount and every selected currency updates immediately. Browser cookies remember your choices, rates, and custom overrides. There is no application server, account system, or database.
+A lightweight, responsive currency converter that runs entirely on GitHub Pages. Edit any amount and every selected currency updates immediately, with an optional markup shown alongside each original amount. Browser cookies remember your choices, rates, custom overrides, and markup preference. There is no application server, account system, or database.
 
 **[Open the app](https://andylamp.github.io/exchange-converter/)** · [Report an issue](https://github.com/andylamp/exchange-converter/issues)
 
@@ -11,13 +11,22 @@ A lightweight, responsive currency converter that runs entirely on GitHub Pages.
 
 - Select between 2 and 12 supported fiat currencies; start with GBP, EUR, and USD.
 - Edit any currency amount, with decimal arithmetic and currency-aware display precision.
+- Add an optional percentage markup and compare read-only totals alongside editable original amounts.
 - Refresh reference rates manually or let the app check for updates every 24 hours while in use.
 - Enter a custom rate, inspect its date, and reset it to the provider rate.
 - Compare multiple currencies on one history chart over one month, three months, or one year.
 - Choose a visible reference currency and switch between rates and percentage changes.
 - Restore browser state across visits and clear it from the interface.
 - Use the bundled rates when an upstream request fails, with visible rate dates and error feedback.
-- Navigate the responsive interface using a keyboard or a touch screen.
+- Use the responsive light/dark interface with a keyboard or a touch screen, with original amounts and markup totals clearly labeled.
+
+## Optional markup
+
+Turn on **Add markup** to show an additional total on every currency card. Markup starts disabled, with a suggested percentage of **12.5%**. Enter a percentage from **0% to 1,000%**; turning markup off retains your chosen percentage for next time.
+
+Each total is calculated once as `unrounded converted amount × (1 + percentage / 100)`, then rounded for that currency. For example, 100 GBP with a 12.5% markup shows 112.50 GBP alongside the original amount. Changing a percentage or toggling markup does not compound it. Custom exchange rates apply before the markup.
+
+Keep editing the original amount boxes to change the conversion. Markup totals are read-only and never become the input to another conversion. Invalid percentage drafts keep the last valid totals visible; leaving the field restores the last valid percentage. Your enabled/disabled choice and percentage are saved with the rest of your browser preferences. Historical rates and chart values always remain independent of markup.
 
 ## Rates and history
 
@@ -44,9 +53,9 @@ The application code is [MIT licensed](LICENSE). Exchange-rate data remains subj
 
 ## Browser state and privacy
 
-A versioned cookie stores the selected currencies, authoritative amount, selected quote snapshots, custom rates, refresh time, and chart preferences. The encoded value is bounded to 3.5 KB. It is scoped to `/exchange-converter/`, uses `SameSite=Lax`, has a 365-day requested lifetime, and uses `Secure` on HTTPS. Browsers may clear or expire it sooner. Malformed or incompatible state falls back to defaults. When persistence is unavailable, the app remains usable and reports the limitation.
+A versioned cookie stores the selected currencies, authoritative amount, selected quote snapshots, custom rates, markup preference, refresh time, and chart preferences. The encoded value is bounded to 3.5 KB. It is scoped to `/exchange-converter/`, uses `SameSite=Lax`, has a 365-day requested lifetime, and uses `Secure` on HTTPS. Browsers may clear or expire it sooner. Malformed or incompatible state falls back to defaults. When persistence is unavailable, the app remains usable and reports the limitation.
 
-Existing cookies from the single-pair chart migrate automatically: their amounts, currency choices, rate overrides, and date range are preserved, and the former pair becomes one comparison in Rates mode. New saves use cookie format version 2 under the existing cookie name; no manual reset is required.
+Existing cookies from formats 1 and 2 migrate automatically with markup disabled and its percentage set to 12.5. Amounts, currency choices, rate overrides, and chart preferences are preserved; an old single-pair chart becomes one comparison in Rates mode. New saves use cookie format version 3 under the existing cookie name; no manual reset is required.
 
 There is no server-side user-state storage, localStorage, analytics, or tracking integration. Cookies are still readable by JavaScript and are sent by browsers with matching requests to the Pages host; cookie paths do not isolate separate apps on the same origin. Requests to Frankfurter contain currency and date parameters, never your entered amount or this app's cookies. GitHub Pages and the rate provider remain external services with their own policies. Use the app's clear/reset control or browser site-data controls to remove saved state.
 

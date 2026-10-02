@@ -3,6 +3,7 @@ import { decimalRate } from './data-validation';
 import type { ChartPreferences, LatestData, Quote, SavedState } from './types';
 
 Decimal.set({ precision: 40, rounding: Decimal.ROUND_HALF_UP });
+const MarkupDecimal = Decimal.clone({ precision: 40, rounding: Decimal.ROUND_HALF_UP });
 export const MAX_CURRENCIES = 12;
 export function isValidAmount(text: string): boolean {
   if (text.length > 32 || !/^-?(?:\d+(?:\.\d*)?|\.\d+)(?:e[+-]?\d{1,3})?$/i.test(text))
@@ -10,9 +11,29 @@ export function isValidAmount(text: string): boolean {
   const value = new Decimal(text).abs();
   return value.isFinite() && value.lte('1e30') && (value.isZero() || value.gte('1e-30'));
 }
+export function isValidMarkupPercent(text: string): boolean {
+  if (typeof text !== 'string' || text.length > 10 || !/^(?:\d+(?:\.\d*)?|\.\d+)$/.test(text))
+    return false;
+  return new MarkupDecimal(text).lte(1000);
+}
+export function markupAmount(amount: string, percent: string): string | null {
+  if (
+    !isValidMarkupPercent(percent) ||
+    typeof amount !== 'string' ||
+    amount.length > 128 ||
+    !/^-?(?:\d+(?:\.\d*)?|\.\d+)(?:e[+-]?\d{1,3})?$/i.test(amount)
+  )
+    return null;
+  const value = new MarkupDecimal(amount);
+  const magnitude = value.abs();
+  // Valid conversions can reach 1e90. Allow derived amounts without accepting enormous exponents.
+  if (!value.isFinite() || magnitude.gt('1e100') || (!value.isZero() && magnitude.lt('1e-100')))
+    return null;
+  return value.times(new MarkupDecimal(percent).div(100).plus(1)).toString();
+}
 export function createDefaultState(latest: LatestData): SavedState {
   return {
-    version: 2,
+    version: 3,
     selected: ['GBP', 'EUR', 'USD'],
     source: 'GBP',
     amount: '100',
@@ -22,6 +43,7 @@ export function createDefaultState(latest: LatestData): SavedState {
     custom: {},
     lastChecked: null,
     chart: { base: 'GBP', quotes: ['USD', 'EUR'], range: '3M', mode: 'change' },
+    markup: { enabled: false, percent: '12.5' },
   };
 }
 export function normalizeChart(chart: ChartPreferences, selected: string[]): ChartPreferences {

@@ -28,7 +28,7 @@ export interface ChartPreferences {
   mode: ChartMode;
 }
 export interface SavedState {
-  version: 2;
+  version: 3;
   selected: string[];
   source: string;
   amount: string;
@@ -36,6 +36,7 @@ export interface SavedState {
   custom: Record<string, CustomRate>;
   lastChecked: string | null;
   chart: ChartPreferences;
+  markup: { enabled: boolean; percent: string };
 }
 export interface HistoryData {
   schemaVersion: 1;

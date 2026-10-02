@@ -1,4 +1,4 @@
-import { isValidAmount, MAX_CURRENCIES } from './core';
+import { isValidAmount, isValidMarkupPercent, MAX_CURRENCIES } from './core';
 import { decimalRate, isTimestamp, validateQuote } from './data-validation';
 import type { ChartMode, ChartRange, SavedState } from './types';
 
@@ -9,6 +9,12 @@ export const MAX_COOKIE_BYTES = 3500;
 const YEAR_SECONDS = 365 * 24 * 60 * 60;
 
 export function encodeState(state: SavedState): string {
+  if (
+    typeof state.markup?.enabled !== 'boolean' ||
+    typeof state.markup?.percent !== 'string' ||
+    !isValidMarkupPercent(state.markup.percent)
+  )
+    throw new Error('Invalid saved markup.');
   const rows = state.selected.map((code) => {
     const quote = state.quotes[code];
     const custom = state.custom[code];
@@ -20,12 +26,13 @@ export function encodeState(state: SavedState): string {
   });
   const value = encodeURIComponent(
     JSON.stringify([
-      2,
+      3,
       rows,
       state.source,
       state.amount,
       state.lastChecked ? Date.parse(state.lastChecked) : null,
       [state.chart.base, state.chart.quotes, state.chart.range, state.chart.mode],
+      [state.markup.enabled, state.markup.percent],
     ]),
   );
   if (new TextEncoder().encode(`${COOKIE_NAME}=${value}`).length > MAX_COOKIE_BYTES)
@@ -37,8 +44,8 @@ export function decodeState(value: string): SavedState {
   const data: unknown = JSON.parse(decodeURIComponent(value));
   if (
     !Array.isArray(data) ||
-    data.length !== 6 ||
-    ![1, 2].includes(data[0]) ||
+    data.length !== (data[0] === 3 ? 7 : 6) ||
+    ![1, 2, 3].includes(data[0]) ||
     !Array.isArray(data[1]) ||
     data[1].length < 2 ||
     data[1].length > MAX_CURRENCIES ||
@@ -116,8 +123,21 @@ export function decodeState(value: string): SavedState {
       throw new Error('Invalid refresh date.');
     lastChecked = new Date(data[4]).toISOString();
   }
+  let markup: SavedState['markup'] = { enabled: false, percent: '12.5' };
+  if (data[0] === 3) {
+    const savedMarkup: unknown = data[6];
+    if (
+      !Array.isArray(savedMarkup) ||
+      savedMarkup.length !== 2 ||
+      typeof savedMarkup[0] !== 'boolean' ||
+      typeof savedMarkup[1] !== 'string' ||
+      !isValidMarkupPercent(savedMarkup[1])
+    )
+      throw new Error('Invalid saved markup.');
+    markup = { enabled: savedMarkup[0], percent: savedMarkup[1] };
+  }
   return {
-    version: 2,
+    version: 3,
     selected,
     source: data[2],
     amount: data[3],
@@ -125,6 +145,7 @@ export function decodeState(value: string): SavedState {
     custom,
     lastChecked,
     chart: { base: c[0], quotes: targets, range: c[2] as ChartRange, mode: mode as ChartMode },
+    markup,
   };
 }
 export function readSavedState(): { state: SavedState | null; warning: string | null } {
